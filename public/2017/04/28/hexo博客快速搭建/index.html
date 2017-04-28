@@ -22,16 +22,16 @@
       <nav class="site-header-nav" role="navigation">
         
               
-              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="首页">首页</a>
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="Home">Home</a>
         
               
-              <a href="/category/" target="true" class=" site-header-nav-item hvr-underline-from-center" title="分类">分类</a>
+              <a href="/categories/"  class=" site-header-nav-item hvr-underline-from-center" title="Category">Category</a>
         
               
-              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="开源项目">开源项目</a>
+              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="Open-Source">Open-Source</a>
         
               
-              <a href="/message/"  class=" site-header-nav-item hvr-underline-from-center" title="留言板">留言板</a>
+              <a href="/message/"  class=" site-header-nav-item hvr-underline-from-center" title="Message">Message</a>
         
       </nav>
   </div>
@@ -63,7 +63,7 @@
 </section>
 	<section class="container">
     <div class="columns">
-        <div class="column  three-fourths " > 
+        <div class="column  three-fourths " >
             <article class="article-content markdown-body">
                 <h3 id="1-全局安装hexo"><a href="#1-全局安装hexo" class="headerlink" title="1.全局安装hexo"></a>1.全局安装hexo</h3><pre><code class="bash">$ npm install hexo-cli -g
 </code></pre>
@@ -131,7 +131,7 @@ at TCP.onread (net.js:569:26)
 更多的文字内容
 </code></pre>
 <p>这里更多的内容</p>
-<h3 id="12-一些问题"><a href="#12-一些问题" class="headerlink" title="12.一些问题"></a>12.一些问题</h3><p>如果发现git上传失败就要考虑一下仓库地址用户名密码是否正确，下面就是我填错仓库地址后报的<font color="#4590a3" size="2px">403</font> 错误</p>
+<h3 id="12-一些问题"><a href="#12-一些问题" class="headerlink" title="12.一些问题"></a>12.一些问题</h3><p>–如果发现git上传失败就要考虑一下仓库地址用户名密码是否正确，下面就是我填错仓库地址后报的<font color="#4590a3" size="2px">403</font> 错误</p>
 <pre><code class="bash">FATAL Something&amp;#39;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
 Error: remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
 fatal: unable to access &#39;https://github.com/imsofter/imsofter.github.io.git/&#39;: The requested URL returned error: 403
@@ -143,6 +143,7 @@ at maybeClose (internal/child_process.js:877:16)
 at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
 FATAL remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
 </code></pre>
+<p>–hexo本地测试运行重启后页面空白,提示 :<code>WARN No layout: index.html</code><br>我遇到你的是因为主题目录下变空白的，重新克隆了主题仓库，然后hexo generate; 之后就OK了。</p>
 
             </article>
             
@@ -160,20 +161,30 @@ FATAL remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
                 
                     
 <div class="comments">
-	<div class="ds-thread" data-thread-key="hexo博客快速搭建" data-title="hexo博客快速搭建" data-url="http://yoursite.com/2017/04/28/hexo博客快速搭建/"></div>
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"null"};
-		(function() {
-			var ds = document.createElement('script');
-			ds.type = 'text/javascript';ds.async = true;
-			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-			ds.charset = 'UTF-8';
-			(document.getElementsByTagName('head')[0]
-			 || document.getElementsByTagName('body')[0]).appendChild(ds);
-		})();
-	</script>
-</div>
+    <div id="disqus_thread"></div>
+    <script>
 
+        var host = window.location.host;
+        var disqus_shortname = host.includes('127.0.0.1') || host.includes('0.0.0.0') || host.includes('localhost') ? 'disqus_nameDev' : 'disqus_name'
+
+        var disqus_title = 'hexo博客快速搭建';
+        var disqus_config = function () {
+            this.page.url = 'http://mrcgon.top/2017/04/28/hexo博客快速搭建/';
+        };
+        
+        (function() {
+            var d = document, s = d.createElement('script');
+
+            s.src = '//disqus_name.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>
+        请启用JavaScript来查看 <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </noscript>
+</div>
                 
             
 
@@ -197,7 +208,6 @@ FATAL remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
     </div>
 </section>
 
-
 <footer class="container">
     <div class="site-footer" role="contentinfo">
         <div class="copyright left mobile-block">
@@ -220,22 +230,22 @@ FATAL remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
             
                   
                   <li>
-                    <a href="/"  title="首页">首页</a>
+                    <a href="/"  title="Home">Home</a>
                   </li>
             
                   
                   <li>
-                    <a href="/category/" target="true" title="分类">分类</a>
+                    <a href="/categories/"  title="Category">Category</a>
                   </li>
             
                   
                   <li>
-                    <a href="/open-source/"  title="开源项目">开源项目</a>
+                    <a href="/open-source/"  title="Open-Source">Open-Source</a>
                   </li>
             
                   
                   <li>
-                    <a href="/message/"  title="留言板">留言板</a>
+                    <a href="/message/"  title="Message">Message</a>
                   </li>
             
             <li>

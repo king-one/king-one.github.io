@@ -3,10 +3,17 @@
   
     
     <entry>
+      <title><![CDATA[你好]]></title>
+      <url>/2017/04/28/%E4%BD%A0%E5%A5%BD/</url>
+      <content type="html"><![CDATA[<h3 id="你真好"><a href="#你真好" class="headerlink" title="你真好"></a>你真好</h3>]]></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[test]]></title>
       <url>/2017/04/28/test/</url>
-      <content type="html"><![CDATA[<p>##测试</p>
-]]></content>
+      <content type="html"><![CDATA[<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2>]]></content>
       
         
     </entry>
@@ -80,7 +87,7 @@ at TCP.onread (net.js:569:26)
 更多的文字内容
 </code></pre>
 <p>这里更多的内容</p>
-<h3 id="12-一些问题"><a href="#12-一些问题" class="headerlink" title="12.一些问题"></a>12.一些问题</h3><p>如果发现git上传失败就要考虑一下仓库地址用户名密码是否正确，下面就是我填错仓库地址后报的<font color="#4590a3" size="2px">403</font> 错误</p>
+<h3 id="12-一些问题"><a href="#12-一些问题" class="headerlink" title="12.一些问题"></a>12.一些问题</h3><p>–如果发现git上传失败就要考虑一下仓库地址用户名密码是否正确，下面就是我填错仓库地址后报的<font color="#4590a3" size="2px">403</font> 错误</p>
 <pre><code class="bash">FATAL Something&amp;#39;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
 Error: remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
 fatal: unable to access &#39;https://github.com/imsofter/imsofter.github.io.git/&#39;: The requested URL returned error: 403
@@ -92,6 +99,7 @@ at maybeClose (internal/child_process.js:877:16)
 at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
 FATAL remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
 </code></pre>
+<p>–hexo本地测试运行重启后页面空白,提示 :<code>WARN No layout: index.html</code><br>我遇到你的是因为主题目录下变空白的，重新克隆了主题仓库，然后hexo generate; 之后就OK了。</p>
 ]]></content>
       
         <categories>

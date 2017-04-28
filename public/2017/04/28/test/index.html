@@ -22,16 +22,16 @@
       <nav class="site-header-nav" role="navigation">
         
               
-              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="首页">首页</a>
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="Home">Home</a>
         
               
-              <a href="/category/" target="true" class=" site-header-nav-item hvr-underline-from-center" title="分类">分类</a>
+              <a href="/categories/"  class=" site-header-nav-item hvr-underline-from-center" title="Category">Category</a>
         
               
-              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="开源项目">开源项目</a>
+              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="Open-Source">Open-Source</a>
         
               
-              <a href="/message/"  class=" site-header-nav-item hvr-underline-from-center" title="留言板">留言板</a>
+              <a href="/message/"  class=" site-header-nav-item hvr-underline-from-center" title="Message">Message</a>
         
       </nav>
   </div>
@@ -58,10 +58,9 @@
 </section>
 	<section class="container">
     <div class="columns">
-        <div class="column  three-fourths " > 
+        <div class="column  three-fourths " >
             <article class="article-content markdown-body">
-                <p>##测试</p>
-
+                <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2>
             </article>
             
                 <div class="share">
@@ -78,20 +77,30 @@
                 
                     
 <div class="comments">
-	<div class="ds-thread" data-thread-key="test" data-title="test" data-url="http://yoursite.com/2017/04/28/test/"></div>
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"null"};
-		(function() {
-			var ds = document.createElement('script');
-			ds.type = 'text/javascript';ds.async = true;
-			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-			ds.charset = 'UTF-8';
-			(document.getElementsByTagName('head')[0]
-			 || document.getElementsByTagName('body')[0]).appendChild(ds);
-		})();
-	</script>
-</div>
+    <div id="disqus_thread"></div>
+    <script>
 
+        var host = window.location.host;
+        var disqus_shortname = host.includes('127.0.0.1') || host.includes('0.0.0.0') || host.includes('localhost') ? 'disqus_nameDev' : 'disqus_name'
+
+        var disqus_title = 'test';
+        var disqus_config = function () {
+            this.page.url = 'http://mrcgon.top/2017/04/28/test/';
+        };
+        
+        (function() {
+            var d = document, s = d.createElement('script');
+
+            s.src = '//disqus_name.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>
+        请启用JavaScript来查看 <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </noscript>
+</div>
                 
             
 
@@ -107,14 +116,13 @@
 <div id="post-directory-module">
 	<section class="post-directory">
 		<p><strong class="toc-title">文章目录</strong></p>
-		
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li></ol>
 	</section>
 </div>
             
         </div>
     </div>
 </section>
-
 
 <footer class="container">
     <div class="site-footer" role="contentinfo">
@@ -138,22 +146,22 @@
             
                   
                   <li>
-                    <a href="/"  title="首页">首页</a>
+                    <a href="/"  title="Home">Home</a>
                   </li>
             
                   
                   <li>
-                    <a href="/category/" target="true" title="分类">分类</a>
+                    <a href="/categories/"  title="Category">Category</a>
                   </li>
             
                   
                   <li>
-                    <a href="/open-source/"  title="开源项目">开源项目</a>
+                    <a href="/open-source/"  title="Open-Source">Open-Source</a>
                   </li>
             
                   
                   <li>
-                    <a href="/message/"  title="留言板">留言板</a>
+                    <a href="/message/"  title="Message">Message</a>
                   </li>
             
             <li>

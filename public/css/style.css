@@ -260,6 +260,9 @@ color: #fff,
 #site-description {
   font-size: 45px;
 }
+#site-description div {
+  display: inline;
+}
 .article-content {
   padding-top: 30px;
 }
@@ -400,6 +403,9 @@ ul.article-tag-list>li a {
 }
 #container-open-source {
   margin-top: 150px;
+}
+.single-column-width {
+  width: 100%;
 }
 /*!
  * Hover.css (http://ianlunn.github.io/Hover/)
