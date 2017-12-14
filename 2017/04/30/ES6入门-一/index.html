@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="icon" href="/favicon.ico">
+  
+  <title>天欲雪 | ES6入门(一)</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox-1.3.4.css">
+  <!--在这里倒入jquery 方便处理部分页面的jquery-->
+  <script src="https://cdn.staticfile.org/jquery/1.7/jquery.min.js" type="text/javascript" ></script>
+</head>
+
+<body>
+	<header class="site-header navfixed-false">
+  <div class="container">
+      <h1><a href="/" title="天欲雪"><span class="octicon octicon-mark-github"></span> 天欲雪</a></h1>
+      <nav class="site-header-nav" role="navigation">
+        
+              
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="首页">首页</a>
+        
+              
+              <a href="/category/" target="true" class=" site-header-nav-item hvr-underline-from-center" title="分类">分类</a>
+        
+              
+              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="开源项目">开源项目</a>
+        
+              
+              <a href="/message/"  class=" site-header-nav-item hvr-underline-from-center" title="留言板">留言板</a>
+        
+      </nav>
+  </div>
+</header>
+
+	
+<section class="collection-head geopattern" data-pattern-id="ES6入门(一)" >
+    <div class="container">
+        <div class="collection-title">
+            <h1 class="collection-header">
+                ES6入门(一)
+            </h1>
+            
+                <div class="collection-info">
+                    <span class="meta-info">
+                        <span class="octicon octicon-calendar"></span>
+                        <time datetime="2017-04-30T08:42:39.000Z" itemprop="datePublished">2017-04-30</time>
+                    </span>
+                    
+                        <span class="meta-info">
+                            <span class="octicon octicon-file-directory"></span>
+                            <a href='/categories/技术/' title=''>技术</a>
+                        </span>
+                    
+                </div>
+            
+        </div>
+    </div>
+</section>
+	<section class="container">
+    <div class="columns">
+        <div class="column  three-fourths " > 
+            <article class="article-content markdown-body">
+                <p>ECMAScript 6.0（以下简称<strong>ES6</strong>）是 JavaScript 语言的下一代标准，已经在2015年6月正式发布了。它的目标，是使得 JavaScript 语言可以用来编写复杂的大型应用程序，成为企业级开发语言。ES6 既是一个历史名词，也是一个泛指，含义是5.1版以后的 JavaScript 的下一代标准，涵盖了ES2015、ES2016、ES2017等等，而ES2015 则是正式名称，特指该年发布的正式版本的语言标准。提到 ES6 的地方，一般是指 ES2015 标准，但有时也是泛指“下一代 JavaScript 语言”。<br><a id="more"></a></p>
+<h3 id="1-let命令"><a href="#1-let命令" class="headerlink" title="1.let命令"></a>1.let命令</h3><p>之前js只有函数作用域，ES6新增了<code>let</code>命令，用来声明变量。它的用法类似于<code>var</code>，但是所声明的变量，只在<code>let</code>命令所在的代码块内有效。下面一个列子很好的说明了<code>var</code>与<code>let</code>的区别</p>
+<pre><code class="javascript">        var b = [];
+            for(var i = 0; i &lt; 10; i++){
+            b[i] = function (){
+                console.log(i);
+            }
+        }
+        console.log(i); //10
+        b[1]()  // 10
+        b[6]()  // 10
+</code></pre>
+<p>在上述代码中，变量i是var声明的，全局都能访问，每次循环这个全局变量i的的值都会发生变化，而循环内被赋给数组b的function在运行时，会通过闭包读到这同一个变量i，导致最后输出的是最后一轮的i的值，也就是10。</p>
+<pre><code class="javascript">        var a = [];
+        for(let i = 0; i &lt; 10; i++){
+            a[i] = function (){
+                console.log(i);
+            }
+        }
+        console.log(i); //undefine
+        a[1]();   //1
+        a[6]();   //6
+</code></pre>
+<p>上面代码中，变量i是let声明的，当前的i只在本轮循环有效，在循环体外会报<code>undefined</code>，所以每一次循环的i其实都是一个新的变量，所以最后输出的是6。如果每一轮循环的变量i都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量i时，就在上一轮循环的基础上进行计算。也可以说循环体内的 i 和外部的 i 是分离的。下面的i在重新定义后仍然输出了3次。</p>
+<pre><code class="javascript">  for (let i = 0; i &lt; 3; i++) {
+    let i = &#39;abc&#39;;
+    console.log(i);
+  }
+  //abc
+  //abc
+  //abc
+</code></pre>
+<h3 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h3><p>在代码块内，使用<code>let</code>命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”<code>（temporal dead zone，简称 TDZ）</code>。如下:</p>
+<pre><code class="javascript">    var temp = &#39;abc&#39;;
+    if(true){
+      temp = &#39;abc&#39;; //ReferenceError: tmp is not defined
+      let temp;
+    }
+</code></pre>
+<p>ES6明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。上面代码中，存在全局变量<code>temp</code>，但是块级作用域内<code>let</code>又声明了一个局部变量<code>temp</code>，导致后者绑定这个块级作用域，所以在<code>let</code>声明变量前，用<code>temp</code>就会报错。<br><strong>隐蔽的死区</strong></p>
+<pre><code class="javascript">    function bar(x = y, y = 2){
+            return [x,y];
+        }
+   bar();  //ReferenceError :  y is not defined
+</code></pre>
+<p>上面y赋值给x时还未定义，所以就会报错，改成这样就不会报错了</p>
+<pre><code class="javascript">    function bar1(x = 2, y = x ){
+            return [x,y]
+}
+    console.log(bar1())    //[2,2]
+</code></pre>
+<p>ES6 规定暂时性死区和let、const语句不出现变量提升，主要是为了减少运行时错误，防止在变量声明前就使用这个变量，从而导致意料之外的行为。</p>
+<h4 id="不允许重复声明"><a href="#不允许重复声明" class="headerlink" title="不允许重复声明"></a>不允许重复声明</h4><p>let不允许在相同作用域内，重复声明同一个变量。</p>
+<pre><code class="javascript">        function fn(){    
+            let a = 10;
+            var a = 1;
+        }
+        fn() //SyntaxError: Identifier &#39;a&#39; has already been declared
+</code></pre>
+<p><strong>不能在函数内部重新声明参数</strong></p>
+<pre><code class="javascript">        function func(arg) {
+          let arg; 
+        }
+        func() // Identifier &#39;arg&#39; has already been declared
+</code></pre>
+<h3 id="2-块级作用域"><a href="#2-块级作用域" class="headerlink" title="2.块级作用域"></a>2.块级作用域</h3><p>es5中应为只有全局作用域和函数作用域，带来的不合理的应用情况：<br>（1） 内层变量可能会覆盖外层变量</p>
+<pre><code class="javascript">    var date1 = new Date();
+        function f() {
+            console.log(date1); //undefined
+            if(false){
+                var date1 = &#39;hello world&#39;;
+            }
+        }
+        f()
+</code></pre>
+<p>（2）循环变量泄露为全局变量</p>
+<pre><code class="javascript">    var  a = &#39;abc&#39;
+    for(var i =0; i &lt; s.lenght; i++){
+       console.log(s[i])
+    }
+          console.log(i); //4
+</code></pre>
+<p><strong>ES6的块级作用域</strong></p>
+<pre><code class="javascript">    var n = 10;
+    function f1() {
+      let n = 5;
+      if (true) {
+        let n = 10;
+      }
+      console.log(n); 
+    }
+    f1(); //5
+    console.log(n); //10
+</code></pre>
+<p>f1函数有两个代码块，都声明了变量n，运行后输出5。这表示外层代码块不受内层代码块的影响。</p>
+<p>ES6 引入了块级作用域，明确允许在块级作用域之中声明函数。ES6 规定，块级作用域之中，函数声明语句的行为类似于let，在块级作用域之外不可引用。</p>
+<p>本质上，块级作用域是一个语句，将多个操作封装在一起，没有返回值。在块级作用域以外，没有办法得到t的值，因为块级作用域不返回值，除非设为全局变量。</p>
+<h3 id="3-const-命令"><a href="#3-const-命令" class="headerlink" title="3.const 命令"></a>3.const 命令</h3><p><code>const</code>声明的是常量。一旦声明，常量的值就不能改变。</p>
+<pre><code class="javascript">const PI = Math.PI
+PI = 23 //Module build failed: SyntaxError: /es6/app.js: &quot;PI&quot; is read-only
+</code></pre>
+<p>当我们尝试去改变用<code>const</code>声明的常量时，浏览器就会报错。对于<code>const</code>来说，只声明不赋值，也会报， const命令声明的常量也是不提升，同样存在暂时性死区,不可重复声明.<br><code>const</code>有一个很好的应用场景，就是当我们引用第三方库的时声明的变量，用<code>const</code>来声明可以避免未来不小心重命名而导致出现bug:</p>
+<pre><code class="javascript">const monent = require(&#39;moment&#39;)
+</code></pre>
+
+            </article>
+            
+                <div class="share">
+                    <!--开启分享-->
+<div class="share-component" data-disabled="google,twitter,facebook" data-description="ECMAScript 6.0（以下简称ES6）是 Ja..."></div>
+
+<script src="/js/share.min.js"></script>
+
+                </div>    
+            
+
+            
+            
+                
+                    
+<div class="comments">
+	<div class="ds-thread" data-thread-key="ES6入门-一" data-title="ES6入门(一)" data-url="http://yoursite.com/2017/04/30/ES6入门-一/"></div>
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"null"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0]
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	</script>
+</div>
+
+                
+            
+
+        </div>
+        <div class="column one-fourth">
+            
+                
+                
+
+
+<h3>Post Directory</h3>
+
+<div id="post-directory-module">
+	<section class="post-directory">
+		<p><strong class="toc-title">文章目录</strong></p>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-let命令"><span class="toc-text"><a href="#1-let&#x547D;&#x4EE4;" class="headerlink" title="1.let&#x547D;&#x4EE4;"></a>1.let&#x547D;&#x4EE4;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#暂时性死区"><span class="toc-text"><a href="#&#x6682;&#x65F6;&#x6027;&#x6B7B;&#x533A;" class="headerlink" title="&#x6682;&#x65F6;&#x6027;&#x6B7B;&#x533A;"></a>&#x6682;&#x65F6;&#x6027;&#x6B7B;&#x533A;</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#不允许重复声明"><span class="toc-text"><a href="#&#x4E0D;&#x5141;&#x8BB8;&#x91CD;&#x590D;&#x58F0;&#x660E;" class="headerlink" title="&#x4E0D;&#x5141;&#x8BB8;&#x91CD;&#x590D;&#x58F0;&#x660E;"></a>&#x4E0D;&#x5141;&#x8BB8;&#x91CD;&#x590D;&#x58F0;&#x660E;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-块级作用域"><span class="toc-text"><a href="#2-&#x5757;&#x7EA7;&#x4F5C;&#x7528;&#x57DF;" class="headerlink" title="2.&#x5757;&#x7EA7;&#x4F5C;&#x7528;&#x57DF;"></a>2.&#x5757;&#x7EA7;&#x4F5C;&#x7528;&#x57DF;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-const-命令"><span class="toc-text"><a href="#3-const-&#x547D;&#x4EE4;" class="headerlink" title="3.const &#x547D;&#x4EE4;"></a>3.const &#x547D;&#x4EE4;</span></a></li></ol>
+	</section>
+</div>
+            
+        </div>
+    </div>
+</section>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+                © 2016
+                <span title="yumemor">yumemor</span>
+                <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+            </li>
+        </ul>
+
+        <a href="https://github.com/yumemor/hexo-theme-primer" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+        </a>
+
+        <ul class="site-footer-links mobile-hidden">
+            
+                  
+                  <li>
+                    <a href="/"  title="首页">首页</a>
+                  </li>
+            
+                  
+                  <li>
+                    <a href="/category/" target="true" title="分类">分类</a>
+                  </li>
+            
+                  
+                  <li>
+                    <a href="/open-source/"  title="开源项目">开源项目</a>
+                  </li>
+            
+                  
+                  <li>
+                    <a href="/message/"  title="留言板">留言板</a>
+                  </li>
+            
+            <li>
+                <a href="/atom.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+		<script src="/js/geopattern.js"></script>
+		<script src="/js/highlight.pack.js"></script>
+		<script src="/lib/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+		
+			<script src="/js/toc.js"></script>
+		
+
+		<script src="/js/index.js"></script>
+
+		 <script src="/js/popular_repo.js"></script> 
+
+	</body>
+</html>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[webpack入门]]></title>
+      <url>/2017/12/14/webpack%E5%85%A5%E9%97%A8/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ES6入门(一)]]></title>
+      <url>/2017/04/30/ES6%E5%85%A5%E9%97%A8-%E4%B8%80/</url>
+      <content type="html"><![CDATA[<p>ECMAScript 6.0（以下简称<strong>ES6</strong>）是 JavaScript 语言的下一代标准，已经在2015年6月正式发布了。它的目标，是使得 JavaScript 语言可以用来编写复杂的大型应用程序，成为企业级开发语言。ES6 既是一个历史名词，也是一个泛指，含义是5.1版以后的 JavaScript 的下一代标准，涵盖了ES2015、ES2016、ES2017等等，而ES2015 则是正式名称，特指该年发布的正式版本的语言标准。提到 ES6 的地方，一般是指 ES2015 标准，但有时也是泛指“下一代 JavaScript 语言”。<br><a id="more"></a></p>
+<h3 id="1-let命令"><a href="#1-let命令" class="headerlink" title="1.let命令"></a>1.let命令</h3><p>之前js只有函数作用域，ES6新增了<code>let</code>命令，用来声明变量。它的用法类似于<code>var</code>，但是所声明的变量，只在<code>let</code>命令所在的代码块内有效。下面一个列子很好的说明了<code>var</code>与<code>let</code>的区别</p>
+<pre><code class="javascript">        var b = [];
+            for(var i = 0; i &lt; 10; i++){
+            b[i] = function (){
+                console.log(i);
+            }
+        }
+        console.log(i); //10
+        b[1]()  // 10
+        b[6]()  // 10
+</code></pre>
+<p>在上述代码中，变量i是var声明的，全局都能访问，每次循环这个全局变量i的的值都会发生变化，而循环内被赋给数组b的function在运行时，会通过闭包读到这同一个变量i，导致最后输出的是最后一轮的i的值，也就是10。</p>
+<pre><code class="javascript">        var a = [];
+        for(let i = 0; i &lt; 10; i++){
+            a[i] = function (){
+                console.log(i);
+            }
+        }
+        console.log(i); //undefine
+        a[1]();   //1
+        a[6]();   //6
+</code></pre>
+<p>上面代码中，变量i是let声明的，当前的i只在本轮循环有效，在循环体外会报<code>undefined</code>，所以每一次循环的i其实都是一个新的变量，所以最后输出的是6。如果每一轮循环的变量i都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量i时，就在上一轮循环的基础上进行计算。也可以说循环体内的 i 和外部的 i 是分离的。下面的i在重新定义后仍然输出了3次。</p>
+<pre><code class="javascript">  for (let i = 0; i &lt; 3; i++) {
+    let i = &#39;abc&#39;;
+    console.log(i);
+  }
+  //abc
+  //abc
+  //abc
+</code></pre>
+<h3 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h3><p>在代码块内，使用<code>let</code>命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”<code>（temporal dead zone，简称 TDZ）</code>。如下:</p>
+<pre><code class="javascript">    var temp = &#39;abc&#39;;
+    if(true){
+      temp = &#39;abc&#39;; //ReferenceError: tmp is not defined
+      let temp;
+    }
+</code></pre>
+<p>ES6明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。上面代码中，存在全局变量<code>temp</code>，但是块级作用域内<code>let</code>又声明了一个局部变量<code>temp</code>，导致后者绑定这个块级作用域，所以在<code>let</code>声明变量前，用<code>temp</code>就会报错。<br><strong>隐蔽的死区</strong></p>
+<pre><code class="javascript">    function bar(x = y, y = 2){
+            return [x,y];
+        }
+   bar();  //ReferenceError :  y is not defined
+</code></pre>
+<p>上面y赋值给x时还未定义，所以就会报错，改成这样就不会报错了</p>
+<pre><code class="javascript">    function bar1(x = 2, y = x ){
+            return [x,y]
+}
+    console.log(bar1())    //[2,2]
+</code></pre>
+<p>ES6 规定暂时性死区和let、const语句不出现变量提升，主要是为了减少运行时错误，防止在变量声明前就使用这个变量，从而导致意料之外的行为。</p>
+<h4 id="不允许重复声明"><a href="#不允许重复声明" class="headerlink" title="不允许重复声明"></a>不允许重复声明</h4><p>let不允许在相同作用域内，重复声明同一个变量。</p>
+<pre><code class="javascript">        function fn(){    
+            let a = 10;
+            var a = 1;
+        }
+        fn() //SyntaxError: Identifier &#39;a&#39; has already been declared
+</code></pre>
+<p><strong>不能在函数内部重新声明参数</strong></p>
+<pre><code class="javascript">        function func(arg) {
+          let arg; 
+        }
+        func() // Identifier &#39;arg&#39; has already been declared
+</code></pre>
+<h3 id="2-块级作用域"><a href="#2-块级作用域" class="headerlink" title="2.块级作用域"></a>2.块级作用域</h3><p>es5中应为只有全局作用域和函数作用域，带来的不合理的应用情况：<br>（1） 内层变量可能会覆盖外层变量</p>
+<pre><code class="javascript">    var date1 = new Date();
+        function f() {
+            console.log(date1); //undefined
+            if(false){
+                var date1 = &#39;hello world&#39;;
+            }
+        }
+        f()
+</code></pre>
+<p>（2）循环变量泄露为全局变量</p>
+<pre><code class="javascript">    var  a = &#39;abc&#39;
+    for(var i =0; i &lt; s.lenght; i++){
+       console.log(s[i])
+    }
+          console.log(i); //4
+</code></pre>
+<p><strong>ES6的块级作用域</strong></p>
+<pre><code class="javascript">    var n = 10;
+    function f1() {
+      let n = 5;
+      if (true) {
+        let n = 10;
+      }
+      console.log(n); 
+    }
+    f1(); //5
+    console.log(n); //10
+</code></pre>
+<p>f1函数有两个代码块，都声明了变量n，运行后输出5。这表示外层代码块不受内层代码块的影响。</p>
+<p>ES6 引入了块级作用域，明确允许在块级作用域之中声明函数。ES6 规定，块级作用域之中，函数声明语句的行为类似于let，在块级作用域之外不可引用。</p>
+<p>本质上，块级作用域是一个语句，将多个操作封装在一起，没有返回值。在块级作用域以外，没有办法得到t的值，因为块级作用域不返回值，除非设为全局变量。</p>
+<h3 id="3-const-命令"><a href="#3-const-命令" class="headerlink" title="3.const 命令"></a>3.const 命令</h3><p><code>const</code>声明的是常量。一旦声明，常量的值就不能改变。</p>
+<pre><code class="javascript">const PI = Math.PI
+PI = 23 //Module build failed: SyntaxError: /es6/app.js: &quot;PI&quot; is read-only
+</code></pre>
+<p>当我们尝试去改变用<code>const</code>声明的常量时，浏览器就会报错。对于<code>const</code>来说，只声明不赋值，也会报， const命令声明的常量也是不提升，同样存在暂时性死区,不可重复声明.<br><code>const</code>有一个很好的应用场景，就是当我们引用第三方库的时声明的变量，用<code>const</code>来声明可以避免未来不小心重命名而导致出现bug:</p>
+<pre><code class="javascript">const monent = require(&#39;moment&#39;)
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> ES6 </tag>
+            
+            <tag> javascript </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[haha]]></title>
+      <url>/2017/04/29/haha/</url>
+      <content type="html"><![CDATA[<h3 id="可以吧！"><a href="#可以吧！" class="headerlink" title="可以吧！"></a>可以吧！</h3>]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[test]]></title>
+      <url>/2017/04/28/test/</url>
+      <content type="html"><![CDATA[<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2>]]></content>
+      
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[hexo博客快速搭建]]></title>
+      <url>/2017/04/28/hexo%E5%8D%9A%E5%AE%A2%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<h3 id="1-全局安装hexo"><a href="#1-全局安装hexo" class="headerlink" title="1.全局安装hexo"></a>1.全局安装hexo</h3><pre><code class="bash">$ npm install hexo-cli -g
+</code></pre>
+<h3 id="2-查看是否安装成功"><a href="#2-查看是否安装成功" class="headerlink" title="2.查看是否安装成功"></a>2.查看是否安装成功</h3><pre><code class="bash">$ hexo -v
+</code></pre>
+<h3 id="3-初始化博客目录"><a href="#3-初始化博客目录" class="headerlink" title="3.初始化博客目录"></a>3.初始化博客目录</h3><p>在你设置的博客文件夹 如D:\hexo\blog  进行gitBash</p>
+<pre><code class="bash">$ hexo init
+</code></pre>
+<p> .初始化后得到的目录如下：</p>
+<pre><code class="bash">├── _config.yml
+├── package.json  
+├── scaffolds
+├── source
+|   ├── _drafts
+|   └── _posts
+└── themes
+</code></pre>
+<a id="more"></a>
+<h4 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h4><p>网站的配置信息，您可以在此配置大部分的参数。</p>
+<h4 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h4><p>依赖包配置文件</p>
+<h4 id="scaffolds"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</h4><p>模版 文件夹。当您新建文章时，Hexo 会根据 <strong>scaffold</strong> 来建立文件。Hexo的模板是指在新建的markdown文件中默认填充的内容。例如，如果您修改scaffold/post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。</p>
+<h4 id="source"><a href="#source" class="headerlink" title="source"></a>source</h4><p>资源文件夹是存放用户资源的地方。除<strong> _posts</strong> 文件夹之外，开头命名为 _ (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
+<h4 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h4><p>主题文件夹。Hexo 会根据主题来生成静态页面。</p>
+<pre><code class="bash">$ npm install
+</code></pre>
+<h3 id="5-服务器"><a href="#5-服务器" class="headerlink" title="5.服务器"></a>5.服务器</h3><p>本地安装hexo-server</p>
+<pre><code class="bash">$ npm install hexo-server --save
+</code></pre>
+<h3 id="6-预览网页"><a href="#6-预览网页" class="headerlink" title="6.预览网页"></a>6.预览网页</h3><pre><code class="bash">$ hexo server
+</code></pre>
+<p>我们会看到这样一条提示：</p>
+<pre><code class="bash">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
+</code></pre>
+<p>打开浏览器访问<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 就可以看到了</p>
+<h3 id="7-配置信息"><a href="#7-配置信息" class="headerlink" title="7.配置信息"></a>7.配置信息</h3><p>找到博客根目录下的配置文件_config.yml，用自己喜欢的文本编辑器编辑它。看到# Site的那一部分，里面的title就是博客的名字，subtitle就是副标题，author对应的那个就是作者名字还有很多配置项可以修改，这里就不详细讲了，可以查看Hexo官方文档对照着修改配置。</p>
+<h3 id="8-更换主题"><a href="#8-更换主题" class="headerlink" title="8.更换主题"></a>8.更换主题</h3><p> 创建 Hexo 主题非常容易，您只要在 themes 文件夹内，新增一个任意名称的文件夹，并修改 _config.yml 内的 theme 设定，即可切换主题。可以查看Hexo官方文档对照着修改主题配置。</p>
+<h3 id="9-写新文章"><a href="#9-写新文章" class="headerlink" title="9.写新文章"></a>9.写新文章</h3><p>执行下面这条命令来创建一篇新文章「First」：</p>
+<pre><code class="bash">$ hexo new &quot;First&quot;
+</code></pre>
+<p>然后会提示我们新建的文章所在路径：</p>
+<pre><code class="bash">INFO  Created: E:\blog\source\_posts\Hello.md
+</code></pre>
+<p>我们找到这个文件之后用Markdown编辑器或其他文本编辑器进行编辑。</p>
+<pre><code>title: Hello
+date: 2015-12-13 15:04:33
+tags:
+---
+## 你好
+#### 这是我的第一篇文章
+</code></pre><p>这是由模板生成的Front-Matter，在—前面的是文章的一些基本信息例如标题、日期及标签，还能添加其他一些选项如分类，我们后面有机会再来说说。</p>
+<p><u>文字</u></p>
+<p>！！！markdown 语法标记美容间需要有空格，这样才能解析</p>
+<p>我们的文章内容要写在—下面，写了个你好看看效果：</p>
+<h3 id="10-生成页面"><a href="#10-生成页面" class="headerlink" title="10.生成页面"></a>10.生成页面</h3><p>文章写好了怎么看效果呢？只需要下面这一条命令就可以将我们写的Markdown文件 (.md后缀) 转换成.html静态页面了：</p>
+<pre><code>$ hexo generate
+</code></pre><h3 id="11-上传到git或者虚拟主机"><a href="#11-上传到git或者虚拟主机" class="headerlink" title="11.上传到git或者虚拟主机"></a>11.上传到git或者虚拟主机</h3><p>我是用ftp工具上传的 hexo 的ftp上传插件一直报如下错误，</p>
+<pre><code class="bash">Error: read ECONNRESET
+at exports._errnoException (util.js:1022:11)
+at TCP.onread (net.js:569:26)
+</code></pre>
+<p>果断放弃了ftp,改用git上传工具<br>上传后可能会发现样式和js文件丢失 那你就要检查一下<strong>_conifg.yml</strong>文件中设置 的<strong>root</strong>路径是否和虚拟主机的文件路径是否吻合</p>
+<h3 id="12-如何生成文章摘要"><a href="#12-如何生成文章摘要" class="headerlink" title="12.如何生成文章摘要"></a>12.如何生成文章摘要</h3><p>默认情况下<strong>hexo</strong>博客(如本站)的首页显示的是完整的文章 而文章比较长的时候怎么样才能只显示个摘要只要加入一个<br><code>&lt;!-- more --&gt;</code>占位符在文章正文里面即可：</p>
+<pre><code class="bash">这就是一个文章简介
+&lt;!-- more --&gt;
+更多的文字内容
+</code></pre>
+<p>这里更多的内容</p>
+<h3 id="12-一些问题"><a href="#12-一些问题" class="headerlink" title="12.一些问题"></a>12.一些问题</h3><p>如果发现git上传失败就要考虑一下仓库地址用户名密码是否正确，下面就是我填错仓库地址后报的<font color="#4590a3" size="2px">403</font> 错误</p>
+<pre><code class="bash">FATAL Something&amp;#39;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
+Error: remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
+fatal: unable to access &#39;https://github.com/imsofter/imsofter.github.io.git/&#39;: The requested URL returned error: 403
+at ChildProcess.&lt;anonymous&gt; (d:\hexo\blog\node_modules\hexo-util\lib\spawn.js:37:17)
+at emitTwo (events.js:106:13)
+at ChildProcess.emit (events.js:191:7)
+at ChildProcess.cp.emit (d:\hexo\blog\node_modules\cross-spawn\lib\enoent.js:40:29)
+at maybeClose (internal/child_process.js:877:16)
+at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+FATAL remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
+</code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>

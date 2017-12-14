@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="icon" href="/favicon.ico">
+  
+  <title>天欲雪 | hexo博客快速搭建</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox-1.3.4.css">
+  <!--在这里倒入jquery 方便处理部分页面的jquery-->
+  <script src="https://cdn.staticfile.org/jquery/1.7/jquery.min.js" type="text/javascript" ></script>
+</head>
+
+<body>
+	<header class="site-header navfixed-false">
+  <div class="container">
+      <h1><a href="/" title="天欲雪"><span class="octicon octicon-mark-github"></span> 天欲雪</a></h1>
+      <nav class="site-header-nav" role="navigation">
+        
+              
+              <a href="/"  class=" site-header-nav-item hvr-underline-from-center" title="首页">首页</a>
+        
+              
+              <a href="/category/" target="true" class=" site-header-nav-item hvr-underline-from-center" title="分类">分类</a>
+        
+              
+              <a href="/open-source/"  class=" site-header-nav-item hvr-underline-from-center" title="开源项目">开源项目</a>
+        
+              
+              <a href="/message/"  class=" site-header-nav-item hvr-underline-from-center" title="留言板">留言板</a>
+        
+      </nav>
+  </div>
+</header>
+
+	
+<section class="collection-head geopattern" data-pattern-id="hexo博客快速搭建" >
+    <div class="container">
+        <div class="collection-title">
+            <h1 class="collection-header">
+                hexo博客快速搭建
+            </h1>
+            
+                <div class="collection-info">
+                    <span class="meta-info">
+                        <span class="octicon octicon-calendar"></span>
+                        <time datetime="2017-04-28T02:39:18.000Z" itemprop="datePublished">2017-04-28</time>
+                    </span>
+                    
+                        <span class="meta-info">
+                            <span class="octicon octicon-file-directory"></span>
+                            <a href='/categories/技术/' title=''>技术</a>
+                        </span>
+                    
+                </div>
+            
+        </div>
+    </div>
+</section>
+	<section class="container">
+    <div class="columns">
+        <div class="column  three-fourths " > 
+            <article class="article-content markdown-body">
+                <h3 id="1-全局安装hexo"><a href="#1-全局安装hexo" class="headerlink" title="1.全局安装hexo"></a>1.全局安装hexo</h3><pre><code class="bash">$ npm install hexo-cli -g
+</code></pre>
+<h3 id="2-查看是否安装成功"><a href="#2-查看是否安装成功" class="headerlink" title="2.查看是否安装成功"></a>2.查看是否安装成功</h3><pre><code class="bash">$ hexo -v
+</code></pre>
+<h3 id="3-初始化博客目录"><a href="#3-初始化博客目录" class="headerlink" title="3.初始化博客目录"></a>3.初始化博客目录</h3><p>在你设置的博客文件夹 如D:\hexo\blog  进行gitBash</p>
+<pre><code class="bash">$ hexo init
+</code></pre>
+<p> .初始化后得到的目录如下：</p>
+<pre><code class="bash">├── _config.yml
+├── package.json  
+├── scaffolds
+├── source
+|   ├── _drafts
+|   └── _posts
+└── themes
+</code></pre>
+<a id="more"></a>
+<h4 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h4><p>网站的配置信息，您可以在此配置大部分的参数。</p>
+<h4 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h4><p>依赖包配置文件</p>
+<h4 id="scaffolds"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</h4><p>模版 文件夹。当您新建文章时，Hexo 会根据 <strong>scaffold</strong> 来建立文件。Hexo的模板是指在新建的markdown文件中默认填充的内容。例如，如果您修改scaffold/post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。</p>
+<h4 id="source"><a href="#source" class="headerlink" title="source"></a>source</h4><p>资源文件夹是存放用户资源的地方。除<strong> _posts</strong> 文件夹之外，开头命名为 _ (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
+<h4 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h4><p>主题文件夹。Hexo 会根据主题来生成静态页面。</p>
+<pre><code class="bash">$ npm install
+</code></pre>
+<h3 id="5-服务器"><a href="#5-服务器" class="headerlink" title="5.服务器"></a>5.服务器</h3><p>本地安装hexo-server</p>
+<pre><code class="bash">$ npm install hexo-server --save
+</code></pre>
+<h3 id="6-预览网页"><a href="#6-预览网页" class="headerlink" title="6.预览网页"></a>6.预览网页</h3><pre><code class="bash">$ hexo server
+</code></pre>
+<p>我们会看到这样一条提示：</p>
+<pre><code class="bash">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
+</code></pre>
+<p>打开浏览器访问<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 就可以看到了</p>
+<h3 id="7-配置信息"><a href="#7-配置信息" class="headerlink" title="7.配置信息"></a>7.配置信息</h3><p>找到博客根目录下的配置文件_config.yml，用自己喜欢的文本编辑器编辑它。看到# Site的那一部分，里面的title就是博客的名字，subtitle就是副标题，author对应的那个就是作者名字还有很多配置项可以修改，这里就不详细讲了，可以查看Hexo官方文档对照着修改配置。</p>
+<h3 id="8-更换主题"><a href="#8-更换主题" class="headerlink" title="8.更换主题"></a>8.更换主题</h3><p> 创建 Hexo 主题非常容易，您只要在 themes 文件夹内，新增一个任意名称的文件夹，并修改 _config.yml 内的 theme 设定，即可切换主题。可以查看Hexo官方文档对照着修改主题配置。</p>
+<h3 id="9-写新文章"><a href="#9-写新文章" class="headerlink" title="9.写新文章"></a>9.写新文章</h3><p>执行下面这条命令来创建一篇新文章「First」：</p>
+<pre><code class="bash">$ hexo new &quot;First&quot;
+</code></pre>
+<p>然后会提示我们新建的文章所在路径：</p>
+<pre><code class="bash">INFO  Created: E:\blog\source\_posts\Hello.md
+</code></pre>
+<p>我们找到这个文件之后用Markdown编辑器或其他文本编辑器进行编辑。</p>
+<pre><code>title: Hello
+date: 2015-12-13 15:04:33
+tags:
+---
+## 你好
+#### 这是我的第一篇文章
+</code></pre><p>这是由模板生成的Front-Matter，在—前面的是文章的一些基本信息例如标题、日期及标签，还能添加其他一些选项如分类，我们后面有机会再来说说。</p>
+<p><u>文字</u></p>
+<p>！！！markdown 语法标记美容间需要有空格，这样才能解析</p>
+<p>我们的文章内容要写在—下面，写了个你好看看效果：</p>
+<h3 id="10-生成页面"><a href="#10-生成页面" class="headerlink" title="10.生成页面"></a>10.生成页面</h3><p>文章写好了怎么看效果呢？只需要下面这一条命令就可以将我们写的Markdown文件 (.md后缀) 转换成.html静态页面了：</p>
+<pre><code>$ hexo generate
+</code></pre><h3 id="11-上传到git或者虚拟主机"><a href="#11-上传到git或者虚拟主机" class="headerlink" title="11.上传到git或者虚拟主机"></a>11.上传到git或者虚拟主机</h3><p>我是用ftp工具上传的 hexo 的ftp上传插件一直报如下错误，</p>
+<pre><code class="bash">Error: read ECONNRESET
+at exports._errnoException (util.js:1022:11)
+at TCP.onread (net.js:569:26)
+</code></pre>
+<p>果断放弃了ftp,改用git上传工具<br>上传后可能会发现样式和js文件丢失 那你就要检查一下<strong>_conifg.yml</strong>文件中设置 的<strong>root</strong>路径是否和虚拟主机的文件路径是否吻合</p>
+<h3 id="12-如何生成文章摘要"><a href="#12-如何生成文章摘要" class="headerlink" title="12.如何生成文章摘要"></a>12.如何生成文章摘要</h3><p>默认情况下<strong>hexo</strong>博客(如本站)的首页显示的是完整的文章 而文章比较长的时候怎么样才能只显示个摘要只要加入一个<br><code>&lt;!-- more --&gt;</code>占位符在文章正文里面即可：</p>
+<pre><code class="bash">这就是一个文章简介
+&lt;!-- more --&gt;
+更多的文字内容
+</code></pre>
+<p>这里更多的内容</p>
+<h3 id="12-一些问题"><a href="#12-一些问题" class="headerlink" title="12.一些问题"></a>12.一些问题</h3><p>如果发现git上传失败就要考虑一下仓库地址用户名密码是否正确，下面就是我填错仓库地址后报的<font color="#4590a3" size="2px">403</font> 错误</p>
+<pre><code class="bash">FATAL Something&amp;#39;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
+Error: remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
+fatal: unable to access &#39;https://github.com/imsofter/imsofter.github.io.git/&#39;: The requested URL returned error: 403
+at ChildProcess.&lt;anonymous&gt; (d:\hexo\blog\node_modules\hexo-util\lib\spawn.js:37:17)
+at emitTwo (events.js:106:13)
+at ChildProcess.emit (events.js:191:7)
+at ChildProcess.cp.emit (d:\hexo\blog\node_modules\cross-spawn\lib\enoent.js:40:29)
+at maybeClose (internal/child_process.js:877:16)
+at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+FATAL remote: Permission to imsofter/imsofter.github.io.git denied to king-one.
+</code></pre>
+
+            </article>
+            
+                <div class="share">
+                    <!--开启分享-->
+<div class="share-component" data-disabled="google,twitter,facebook" data-description="1.全局安装hexo$ npm install hex..."></div>
+
+<script src="/js/share.min.js"></script>
+
+                </div>    
+            
+
+            
+            
+                
+                    
+<div class="comments">
+	<div class="ds-thread" data-thread-key="hexo博客快速搭建" data-title="hexo博客快速搭建" data-url="http://yoursite.com/2017/04/28/hexo博客快速搭建/"></div>
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"null"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0]
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	</script>
+</div>
+
+                
+            
+
+        </div>
+        <div class="column one-fourth">
+            
+                
+                
+
+
+<h3>Post Directory</h3>
+
+<div id="post-directory-module">
+	<section class="post-directory">
+		<p><strong class="toc-title">文章目录</strong></p>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-全局安装hexo"><span class="toc-text"><a href="#1-&#x5168;&#x5C40;&#x5B89;&#x88C5;hexo" class="headerlink" title="1.&#x5168;&#x5C40;&#x5B89;&#x88C5;hexo"></a>1.&#x5168;&#x5C40;&#x5B89;&#x88C5;hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-查看是否安装成功"><span class="toc-text"><a href="#2-&#x67E5;&#x770B;&#x662F;&#x5426;&#x5B89;&#x88C5;&#x6210;&#x529F;" class="headerlink" title="2.&#x67E5;&#x770B;&#x662F;&#x5426;&#x5B89;&#x88C5;&#x6210;&#x529F;"></a>2.&#x67E5;&#x770B;&#x662F;&#x5426;&#x5B89;&#x88C5;&#x6210;&#x529F;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-初始化博客目录"><span class="toc-text"><a href="#3-&#x521D;&#x59CB;&#x5316;&#x535A;&#x5BA2;&#x76EE;&#x5F55;" class="headerlink" title="3.&#x521D;&#x59CB;&#x5316;&#x535A;&#x5BA2;&#x76EE;&#x5F55;"></a>3.&#x521D;&#x59CB;&#x5316;&#x535A;&#x5BA2;&#x76EE;&#x5F55;</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#config-yml"><span class="toc-text"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#package-json"><span class="toc-text"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#scaffolds"><span class="toc-text"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#source"><span class="toc-text"><a href="#source" class="headerlink" title="source"></a>source</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#themes"><span class="toc-text"><a href="#themes" class="headerlink" title="themes"></a>themes</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-服务器"><span class="toc-text"><a href="#5-&#x670D;&#x52A1;&#x5668;" class="headerlink" title="5.&#x670D;&#x52A1;&#x5668;"></a>5.&#x670D;&#x52A1;&#x5668;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-预览网页"><span class="toc-text"><a href="#6-&#x9884;&#x89C8;&#x7F51;&#x9875;" class="headerlink" title="6.&#x9884;&#x89C8;&#x7F51;&#x9875;"></a>6.&#x9884;&#x89C8;&#x7F51;&#x9875;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-配置信息"><span class="toc-text"><a href="#7-&#x914D;&#x7F6E;&#x4FE1;&#x606F;" class="headerlink" title="7.&#x914D;&#x7F6E;&#x4FE1;&#x606F;"></a>7.&#x914D;&#x7F6E;&#x4FE1;&#x606F;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-更换主题"><span class="toc-text"><a href="#8-&#x66F4;&#x6362;&#x4E3B;&#x9898;" class="headerlink" title="8.&#x66F4;&#x6362;&#x4E3B;&#x9898;"></a>8.&#x66F4;&#x6362;&#x4E3B;&#x9898;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-写新文章"><span class="toc-text"><a href="#9-&#x5199;&#x65B0;&#x6587;&#x7AE0;" class="headerlink" title="9.&#x5199;&#x65B0;&#x6587;&#x7AE0;"></a>9.&#x5199;&#x65B0;&#x6587;&#x7AE0;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-生成页面"><span class="toc-text"><a href="#10-&#x751F;&#x6210;&#x9875;&#x9762;" class="headerlink" title="10.&#x751F;&#x6210;&#x9875;&#x9762;"></a>10.&#x751F;&#x6210;&#x9875;&#x9762;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-上传到git或者虚拟主机"><span class="toc-text"><a href="#11-&#x4E0A;&#x4F20;&#x5230;git&#x6216;&#x8005;&#x865A;&#x62DF;&#x4E3B;&#x673A;" class="headerlink" title="11.&#x4E0A;&#x4F20;&#x5230;git&#x6216;&#x8005;&#x865A;&#x62DF;&#x4E3B;&#x673A;"></a>11.&#x4E0A;&#x4F20;&#x5230;git&#x6216;&#x8005;&#x865A;&#x62DF;&#x4E3B;&#x673A;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-如何生成文章摘要"><span class="toc-text"><a href="#12-&#x5982;&#x4F55;&#x751F;&#x6210;&#x6587;&#x7AE0;&#x6458;&#x8981;" class="headerlink" title="12.&#x5982;&#x4F55;&#x751F;&#x6210;&#x6587;&#x7AE0;&#x6458;&#x8981;"></a>12.&#x5982;&#x4F55;&#x751F;&#x6210;&#x6587;&#x7AE0;&#x6458;&#x8981;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-一些问题"><span class="toc-text"><a href="#12-&#x4E00;&#x4E9B;&#x95EE;&#x9898;" class="headerlink" title="12.&#x4E00;&#x4E9B;&#x95EE;&#x9898;"></a>12.&#x4E00;&#x4E9B;&#x95EE;&#x9898;</span></a></li></ol>
+	</section>
+</div>
+            
+        </div>
+    </div>
+</section>
+
+
+<footer class="container">
+    <div class="site-footer" role="contentinfo">
+        <div class="copyright left mobile-block">
+                © 2016
+                <span title="yumemor">yumemor</span>
+                <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+        </div>
+
+        <ul class="site-footer-links right mobile-hidden">
+            <li>
+                <a href="javascript:window.scrollTo(0,0)" >TOP</a>
+            </li>
+        </ul>
+
+        <a href="https://github.com/yumemor/hexo-theme-primer" target="_blank" aria-label="view source code">
+            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+        </a>
+
+        <ul class="site-footer-links mobile-hidden">
+            
+                  
+                  <li>
+                    <a href="/"  title="首页">首页</a>
+                  </li>
+            
+                  
+                  <li>
+                    <a href="/category/" target="true" title="分类">分类</a>
+                  </li>
+            
+                  
+                  <li>
+                    <a href="/open-source/"  title="开源项目">开源项目</a>
+                  </li>
+            
+                  
+                  <li>
+                    <a href="/message/"  title="留言板">留言板</a>
+                  </li>
+            
+            <li>
+                <a href="/atom.xml">
+                    <span class="octicon octicon-rss" style="color:orange;"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</footer>
+
+		<script src="/js/geopattern.js"></script>
+		<script src="/js/highlight.pack.js"></script>
+		<script src="/lib/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+		
+			<script src="/js/toc.js"></script>
+		
+
+		<script src="/js/index.js"></script>
+
+		 <script src="/js/popular_repo.js"></script> 
+
+	</body>
+</html>
