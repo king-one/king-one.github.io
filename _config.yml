@@ -73,13 +73,4 @@ deploy:
    type: git
    repository: https://github.com/king-one/king-one.github.io.git
    branch: master
- # type: ftpsync
- # host: bxu2359350083.my3w.com
- # user: bxu2359350083
- # pass: chen13771123180
-#  remote: /htdocs
-#  port: 21
-#  ignore: ['baiCaoWei','emlog']
-#  connections: 2
- # verbose: false
 
