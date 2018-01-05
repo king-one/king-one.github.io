@@ -43,4 +43,6 @@ getArea(shapeType.triangle, { width: 100, height: 100 });
 
 可以发现`shapeType.triangle`等于哪个值并不重要，只要确保不会跟其他`shapeType`属性的值冲突即可。因此，这里就很适合改用Symbol值。
 
-5.*Object.getOwnPropertySymbols()* 可以获取指定对象的所有 Symbol 属性名。
+5.```Object.getOwnPropertySymbols()``` 可以获取指定对象的所有 Symbol 属性名。
+
+6.
