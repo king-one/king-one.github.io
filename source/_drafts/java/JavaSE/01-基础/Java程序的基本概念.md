@@ -30,7 +30,7 @@ char
     byte,short,char-> int -> long -> float -> double
  (2) 强制类型转换
 在数据前加上() 并填入需要转换的类型  转换结果会发生精度的改变;
-``
+```
 public class Demo {
     public static void main(String[] args){
         int x;
@@ -41,4 +41,5 @@ public class Demo {
         System.out.println("y=" + y);
     }
 }
-``
+```
+
