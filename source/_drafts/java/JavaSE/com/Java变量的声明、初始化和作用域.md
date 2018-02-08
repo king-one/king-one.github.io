@@ -76,3 +76,26 @@ public class Test {
 
 3.常量
 用关键字final声明。成员常量:方法内的常量；类常量：类的常量，需要用static 和 void 组合。无需再构造对象即可直接引用这个常
+```java
+
+public class var{
+    public static void main(String[] args){
+        var m=new var();
+        final int X=20;
+        System.out.println("常量 X="+X);
+    }
+}
+//常量 X=20
+```
+
+如果要声明一个类常量，就需要使用关键字“static”和“final”的组合，例如下面的例子。
+```java
+///这里的 x 是类常量，所以无论是哪个对象的引用，它的值终究不变
+public class var{
+    static final int X=20;
+    public static void main(String[] args){
+        System.out.println(" 打印数据 X="+X);
+    }
+}
+//打印数据 X=20
+```
