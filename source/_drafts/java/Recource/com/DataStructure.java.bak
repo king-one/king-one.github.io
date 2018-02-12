@@ -18,17 +18,8 @@ public class DataStructure{
 	  System.out.println("计算乘积" + m + "*" + n +"=" + m*n);
 
 	  // 布尔型
-	  boolean q = 100 > 99;
-	  System.out.println("100>99="+ q);
-
-	  //类型转换
-
-	    int x;
-        double y;
-        x = (int)34.56 + (int)11.2;  // 丢失精度
-        y = (double)x + (double)10 + 1;  // 提高精度
-        System.out.println("x=" + x);
-        System.out.println("y=" + y);
+	  boolean x = 100 > 99;
+	  System.out.println("100>99="+ x);
 
 }
 }
